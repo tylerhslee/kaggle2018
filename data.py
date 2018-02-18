@@ -73,6 +73,17 @@ class Image(object):
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
+    @classmethod
+    def write(cls, cv2_imgs, template=None):
+        """
+        Saves a list of images to the disk.
+        The name of each image is determined by an enumeration appended to
+        the end of the template supplied as a parameter.
+        """
+        for i, img in enumerate(cv2_imgs):
+            file_name = '{}_{}.png'.format(template, i + 1)
+            cv2.imwrite(file_name, img)
+
     def preprocess(self):
         return self
 
@@ -103,5 +114,5 @@ class Image(object):
         fin_cells = np.array([[i[i > 0] for i in cell if len(i[i > 0]) > 0]
                               for cell in cells])
 
-        # Return a rectangular image (2-D numpy array)
+        # Return a list of cell images
         return fin_cells
