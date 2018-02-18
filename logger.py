@@ -53,7 +53,7 @@ class Logger(object):
         Add a logging.RotatingFileHandler to the logger object that will be
         returned by the create() method.
         """
-        filepath = os.path.join(os.getcwd(), 'log', filename)
+        filepath = os.path.join(os.getcwd(), 'logs', filename)
         fh = RotatingFileHandler(filepath, maxBytes=1000, backupCount=3)
         fh.setLevel(Logger.levelname_to_int(level))
         fh.setFormatter(self.formatter)
