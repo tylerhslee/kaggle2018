@@ -18,13 +18,6 @@ import yaml
 from data import Image
 from logger import Logger
 
-# Make sure to edit the config file to the proper root directory.
-# It is the full path to the stage1_train folder.
-with open('config.yml', 'r') as rf:
-    config = yaml.safe_load(rf)
-
-ROOT_DIR = config['root-dir']
-
 _ = Logger(__name__).create()
 
 
@@ -43,6 +36,7 @@ def read_img(id_, mask=None):
 
 
 def load_data(id_):
+    _.debug('Reading image ID {}'.format(id_))
     mask_files = os.listdir(os.path.join(os.getcwd(), id_, 'masks'))
     image = read_img(id_)
     masks = [read_img(id_, mask=i) for i in mask_files]
@@ -97,9 +91,15 @@ def train_cell_image(train_data):
 
 
 if __name__ == '__main__':
+    # Make sure to edit the config file to the proper root directory.
+    # It is the full path to the stage1_train folder.
+    with open('config.yml', 'r') as rf:
+        config = yaml.safe_load(rf)
+
+    ROOT_DIR = config['root-dir']
+
     os.chdir(ROOT_DIR)
-    img_ids = os.listdir('.')[:2]
-    print(img_ids[0])
+    img_ids = os.listdir('.')
     train_data = [load_data(i) for i in img_ids]
 
     train_cell_image(train_data)
