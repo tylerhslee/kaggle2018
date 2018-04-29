@@ -12,6 +12,7 @@ $ pip3 install -r requirements.txt
 $ chmod +x main.py
 $ ./main.py
 ```
+Before running the script, make sure to point the `config.yml` file to the correct dataset.
 
 ## Method
 I plan to take the following steps to approach this problem.
