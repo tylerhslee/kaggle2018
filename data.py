@@ -24,7 +24,7 @@ class Image(object):
         self.img = cv2_img
         self.masks = masks
 
-    def normalize(self, img, cell_width, cell_height):
+    def add_padding(self, img, cell_width, cell_height):
         """
         Makes sure that all individual cell images that comes from a single
         image ID has the same dimensions by adding black paddings.
@@ -81,5 +81,5 @@ class Image(object):
         heights = [m.shape[1] for m in self.masks]
         cell_width = max(widths)
         cell_height = max(heights)
-        nmasks = [self.normalize(m, cell_width, cell_height) for m in self.masks]
+        nmasks = [self.add_padding(m, cell_width, cell_height) for m in self.masks]
         return nmasks
