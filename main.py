@@ -82,7 +82,7 @@ def train_cell_image(train_data):
     original_data is an array of dictionaries returned by load_data().
     """
     # Array of images of individual cells
-    cell_images = [save_data(img) for img in train_data]
+    cell_images = [save_data(image) for image in train_data]
 
     # Array of images of background that doesn't contain cells
     background_images = [sample_background(k) for k in train_data]
